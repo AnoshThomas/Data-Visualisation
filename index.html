@@ -53,10 +53,15 @@
 	  //Main functipo n to create the page 		
 	 function draw(data) {
 	   	var hG, pC, leg, barColor = 'steelblue';
-		function segColor(c){
-			return {arr_flights:"#807dba", arr_del15:"#e08214",
-								arr_cancelled:"#41ab5d"}[c];
-			}
+	
+		// cretae google color scale 
+		function colors_google(n) {
+			var colors_g = ["#109618", "#ff9900", "#dc3912",
+			"#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395",
+			"#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707",
+			"#651067", "#329262", "#5574a6", "#3b3eac","#3366cc"  ];
+			return colors_g[n % colors_g.length];}
+		
 		
 		// compute Total for each carrier.
 		data.forEach(function(d){d.total=d.arr_flights +d.arr_del15 + 
@@ -117,89 +122,149 @@
 				.attr("width", x.rangeBand())
 				.attr("height", function(d) { return hGDim.h - y(d[1]); })
 				.attr('fill',barColor)
-				//.on("mouse_over",mouseover)// mouse_over defined below.
-				//.on("mouse_out",mouseout);// mouse_out defined below.
-			
+				
 			//Create the  labels above the bars.		
 			bars.append("text").text(function(d){return d3.format(".2f")(d[1])})
 				.attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
 				.attr("y", function(d) { return y(d[1]) -5; })
 				.attr("text-anchor", "middle");		
 			
-			// utility function to be called on mouseover
-			// filter for selected state
+			// Event handler to the bars by moving mouse over it 
+			// to update the piechart associated with that bar
+			// calls mosueoverPie() defined below		
 			
-			function mouseover(d){ 
-									
-				var st = fData.filter(function(s){ return s.carrier == d[0];})[0],
-					nD = d3.keys(st.freq).map(function(s){
-				return {type:s, freq:st.freq[s]};});
-				
-				// call update functions of piechart and legend.
-				pC.update(nD);
-				leg.update(nD);				
-				}
+			bars.on('mouseover', mouseoverPie);
 			
-			 // utility function to be called on mouseout
-			 // reset the pie-chart and legend.
-			function mouseout(d){ 
-							     
-				pC.update(tF);
-				leg.update(tF);
-			}
-			// create function to update the bars to be used by piechart
-			  hG.update = function(nD, color){
-					// update the domain of the y-axis map to reflect change.
-						y.domain([0, d3.max(nD, function(d) { return d[1]; })]);
-					// Attach the new data to the bars.
-					var bars = hGsvg.selectAll(".bar").data(nD);
-					// transition the height and color of rectangles.
-					bars.select("rect").transition().duration(500)
-					.attr("y", function(d) {return y(d[1]); })
-					.attr("height", function(d) { return hGDim.h - y(d[1]); })
-					.attr("fill", color);
-					// transition the frequency labels location and change value.
-					bars.select("text").transition().duration(500)
-					.text(function(d){ return d3.format(".2f")(d[1])})
-					.attr("y", function(d) {return y(d[1])-5; });
-					}
+			function mouseoverPie(d) {
+                // d is the bar data (it changes for each bar), 
+                // and it contains 5 observations (given the change to how
+                // data is passed to the bar chart)
+
+                // create labels for data
+                var labels = ["On Time", "Delayed","Cancelled"]
+
+                // for the pie chart, you want the data to be a list of objects
+                var pieData = [];
+
+                d.slice(2, 5).forEach(function(d, i) {
+                    var temp = {};
+                    temp['value'] = d;
+                    temp['labels'] = labels[i];
+                    pieData.push(temp);
+                })
+
+                // call the pieChart() function with the new data
+                pieChart(pieData);
+                // leg.update(nD);
+            }
+			
+		
 			return hG;
 		}
 		
 		// function to handle pieChart.
-			function pieChart(pD){
-				var pC ={}, pieDim ={w:250, h: 250};
-				pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
+		 function pieChart(pD) {
+            d3.select("svg#pieChart").remove();
+			
+
+            var pC = {},
+                pieDim = {
+                    w: 250,
+                    h: 250
+                };
+            pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
+            console.log("pD");
+            console.log(pD);
+            console.log(pieDim);
+
+            var rw = pieDim.w / 2;
+            var rh = pieDim.h / 2;
+
+
+            // create svg for pie chart.
+            var piesvg = d3.select("body").append("svg:svg").attr("id", "pieChart")
+                .data([pD]) //associate our data with the document
+                .attr("width", pieDim.w).attr("height", pieDim.h).append("svg:g")
+                .attr("transform", "translate(" + rw + "," + rh + ")");
+            //move the center of the pie chart from 0, 0 to radius, radius
+
+
+            // create function to draw the arcs of the pie slices.
+            // var arc = d3.svg.arc().outerRadius(50).innerRadius(0);
+            var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
+
+            // create a function to compute the pie slice angles.
+            var pie = d3.layout.pie()
+                .sort(null)
+                .value(function(d, i) {
+                    return d.value;
+                });
+
+            // Draw the pie slices.
+            var arcs = piesvg.selectAll("g.slice") //this selects all <g> elements with class slice (there aren't any yet)
+                .data(pie) //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
+                .enter() //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
+                .append("svg:g") //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
+                .attr("class", "slice"); //allow us to style things in the slices (like text)
+
+            arcs.append("svg:path")
+                .attr("fill", function(d, i) {
+                    return colors_google(i);
+                }) //set the color for each slice to be chosen from the color function defined above
+				.transition()
+				.delay(function(d, i) {
+					return i * 200;
+				})
+				.duration(500)
+                .attr("d", arc) //this creates the actual SVG path using the associated data (pie) with the arc drawing function
 				
-			// create svg for pie chart.
-			var piesvg = d3.select("body").append("svg")
-				.attr("width", pieDim.w).attr("height", pieDim.h).append("g")
-				.attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");	
-			
-			// create function to draw the arcs of the pie slices.
-			var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0)
+            arcs.append("svg:text") //add a label to each slice
+                .attr("transform", function(d) { //set the label's origin to the center of the arc
+                    //we have to make sure to set these before calling arc.centroid
+                    d.innerRadius = 0;
+                    d.outerRadius = pieDim.r - 10;
+                    return "translate(" + arc.centroid(d) + ")"; //this gives us a pair of coordinates like [50, 50]
+                })
+                
+				 //get the percentages for each segmen tin the pie chart	
+                .text(function(d, i) {					
+					var formatDecimal = d3.format(".1f")
+					var sum = d3.sum(pD, function(d) { return d.value; })					
+                    var percent =  100*(pD[i].value)/sum;
+					return formatDecimal(percent) + "%"
 					
-		
-			// create a function to compute the pie slice angles.
-			var pie = d3.layout.pie()
-						.sort(null)
-						.value(function(d)
-						{return d;});			
-		
-			// Draw the pie slices.
-				piesvg.selectAll(".solidArc").data(pie(pD)).enter()
-					  .append("path")
-					  .each(function(d) { this._current = d; })
-					  .style("fill", function(d) { return segColor(d.data.type); })
-					  .attr("d", arc)
-				//.on("mouseover",mouseover).on("mouseout",mouseout);
-			
-			return pC;
-			}
+                })		
+				
+				// Add legend 
+				//d3.select("legend").remove();
+				// d3.select("svg:svg#pieChart").remove();
+				var legend = d3.select("body").append("svg:svg")
+								.attr("class", "legend")          
+								.selectAll("g")
+								.data(pD)
+								.enter().append("g")
+						.attr("transform", function(d, i) {return "translate(0," + i * 20 + ")"; });
+
+				legend.append("rect")
+				.attr("width", 18)
+				.attr("height", 18)
+				.style("fill", function(d, i) {
+				return colors_google(i);
+				});
+
+				legend.append("text")
+					  .attr("x", 24)
+					 .attr("y", 9)
+                     .attr("dy", ".35em")
+                     .text(function(d,i) { return pD[i].labels; });  				
+			 
+            return pC;
+        }		
 		// Extract histogram data 
 		var hGData = data.map(function(d){			
 					
-				return [d.carrier,d.onTime];		
+				return [d.carrier,d.onTime,d.arr_flights,
+						d.arr_del15, d.arr_cancelled];		
 		});
 		
 		//Extract Piechart data 
@@ -210,7 +275,7 @@
 
 		//Create data for Hsitogram, PieChart and legend 
 		var hG = handleHistogram(hGData);
-		var pC = pieChart(piChartData) 
+		var pC = pieChart(piChartData);
 		
      
     };
