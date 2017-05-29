@@ -30,6 +30,7 @@
 	.legendFreq, .legendPerc{ align:right; width:50px; }
     </style>
 	
+	
 	Select year 
 	<select onchange="loadData()" id="year">
 			<option >2003</option>
@@ -50,11 +51,11 @@
 	</select>	
     <script type="text/javascript">  
      			
-	  //Main functio n to create the page 		
+	  //Main function to create the page 		
 	 function draw(data) {
 	   	var hG, pC, leg, barColor = 'steelblue';
 	
-		// cretae google color scale 
+		// create google color scale 
 		function colors_google(n) {
 			var colors_g = ["#109618", "#ff9900", "#dc3912",
 			"#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395",
@@ -284,7 +285,8 @@
   </head>
 <body>
   <script type="text/javascript">
-    
+		
+		// load the data for each year according to user input
 		var loadData = function() {
 		var myYear = document.getElementById('year').selectedOptions[0].text;
 		var dataFile = 'airlinePerfoPreprocessed_' + myYear + '.csv'	
