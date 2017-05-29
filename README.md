@@ -18,7 +18,7 @@ My initial design (index_1.html)  contained only the bar chart graph and after o
 
 ## Feedback 
 
-user 1:Alvi Vincent (index_1.html)
+### user 1:Alvi Vincent (index_1.html)
   
 •	  What do you notice in the visualization?
 
@@ -41,7 +41,7 @@ It is possible to compare the on time performances of various carriers throughou
 Not really, The visualisation is quite self-explaining but I would recommend a second chart which illustrates some key characteristics for a specific carrier
 
 
-User 2: Filip Biedziak
+### User 2: Filip Biedziak
 •	What do you notice in the visualization?
 
 I’m not 100% sure what you exactly mean by that. Do you mean what information I see? Well, that would be the performance of different American carriers measured by some number (above the bars) and categorizing deliveries by “on time”, “delayed” and “cancelled” over time.
