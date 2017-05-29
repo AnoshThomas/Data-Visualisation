@@ -68,18 +68,23 @@ Not really. It is pretty straightforward.
 Would you mind answering these questions?
 
 •	What do you notice in the visualization?
+
 [BLANC, Florian]  It is interactive and rather self-explaining, easy to enter. I like it 
 
 •	What questions do you have about the data?
+
 [BLANC, Florian] Was interested in seeing how performance has changed over the year but this is not really straightforward to explore as such.
 
 •	What relationships do you notice?
+
 [BLANC, Florian] The main performance degradation is related to delays in the operations and cancellations seems low in general.
 
 •	What do you think is the main takeaway from this visualization?
+
 [BLANC, Florian] Overall performance is about 0.8 with little deviations.
 
 •	Is there something you don’t understand in the graphic?
+
 [BLANC, Florian] In don’t clearly understand the link between the figures on top of the bar graph and the figures on the pie graph.
 
 
