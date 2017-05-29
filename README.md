@@ -1,6 +1,6 @@
 # Data-Visualisation
 
-This folder contains the HTML document index.html and 15 csv files (for performance statistics for the years 2003-2017)
+This folder contains the HTML documents index.html and index_1.html (first draft) and 15 csv files (for performance statistics for the years 2003-2017). Also a python script for generating the 15 csv files is supplied.
 
 
 ## Summary 
