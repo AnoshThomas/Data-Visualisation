@@ -50,7 +50,7 @@
 	</select>	
     <script type="text/javascript">  
      			
-	  //Main functipo n to create the page 		
+	  //Main functio n to create the page 		
 	 function draw(data) {
 	   	var hG, pC, leg, barColor = 'steelblue';
 	
@@ -67,7 +67,7 @@
 		data.forEach(function(d){d.total=d.arr_flights +d.arr_del15 + 
 												d.arr_cancelled;});				
 		
-	   //Dynamiclaly set the heading for each year 
+	   //Dynamically set the heading for each year 
 	   var selectedYear = document.getElementById('year')
 								  .selectedOptions[0].text;
 								  
@@ -112,7 +112,7 @@
 			var bars = hGsvg.selectAll("bar").data(hGData);			
 			
 				
-			//Draw the rectangles
+			//Draw the Rectangles
 			bars.enter()
 				.append("g")
 				.attr("class", "bar")
@@ -226,7 +226,7 @@
                     return "translate(" + arc.centroid(d) + ")"; //this gives us a pair of coordinates like [50, 50]
                 })
                 
-				 //get the percentages for each segmen tin the pie chart	
+				 //get the percentages for each segment in the pie chart	
                 .text(function(d, i) {					
 					var formatDecimal = d3.format(".1f")
 					var sum = d3.sum(pD, function(d) { return d.value; })					
@@ -238,6 +238,7 @@
 				// Add legend 
 				//d3.select("legend").remove();
 				// d3.select("svg:svg#pieChart").remove();
+				d3.select("svg.legend").remove();
 				var legend = d3.select("body").append("svg:svg")
 								.attr("class", "legend")          
 								.selectAll("g")
