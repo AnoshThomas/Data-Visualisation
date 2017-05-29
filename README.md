@@ -13,7 +13,7 @@ In addition on selecting a specific year and carrier a second chart illustrates 
 The main aim was to create an illustration showing the comparison of on time performances of various american carriers for the years 2003-2007. For this I chose to use bar charts with the values displayed on top of the bar chart. In addition i used a drop down widget for 
 enabling the user to select the desired year.  
 
-My initial design (index_v1.html)  contained only the bar chart graph and after obtaining feedback I chose to incldue a second chart 
+My initial design (index_1.html)  contained only the bar chart graph and after obtaining feedback I chose to incldue a second chart 
 (pie-chart) which illustrated the statistics for a specific carrier in a given year. While hovering with the mouse on a bar woudl reflect the changes in the pie-chart.  Also I changed the color code to google style whcih was a bit more pleasing. 
 
 ## Feedback 
