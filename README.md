@@ -6,15 +6,17 @@ This folder contains the HTML document index.html and 15 csv files (for performa
 ## Summary 
 
 This visualisation aims to explore the on time performances of various american carriers through the years 2003-2017. 
-In addition on selecting a specific year and carrier a second chart illustrates the distribution for that specific carrier (delayed, on time, cancelled) 
+In addition on selecting a specific year and carrier a second chart illustrates the distribution for that specific carrier (delayed, on time, cancelled) , the individual csv files were generated in a preprocessing step using a python script (preProcessAirlinePerfo.py)
+to separate the data for each year. The ontime performance was calculated using teh formula onTimePerfo=1-delayed/arrivals. 
 
 ## Design
 
-The main aim was to create an illustration showing the comparison of on time performances of various american carriers for the years 2003-2007. For this I chose to use bar charts with the values displayed on top of the bar chart. In addition i used a drop down widget for 
-enabling the user to select the desired year.  
+The main aim was to create an illustration showing the comparison of on time performances of various american carriers for the years 2003-2007. For this I chose to use bar charts with the values displayed on top of the bar chart. In addition i used a drop down widget for enabling the user to select the desired year.  
 
 My initial design (index_1.html)  contained only the bar chart graph and after obtaining feedback I chose to include a second chart 
-(pie-chart) which illustrated the statistics for a specific carrier in a given year. While hovering with the mouse on a bar would reflect the changes in the pie-chart.  Also I changed the color code to google style which was a bit more pleasing. 
+(pie-chart) which illustrated the statistics for a specific carrier in a given year. While hovering with the mouse on a bar would reflect the changes in the pie-chart. I added a legend and changed the color code to google style which was a bit more pleasing. 
+
+
 
 ## Feedback 
 
