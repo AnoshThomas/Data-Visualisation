@@ -41,6 +41,7 @@ It is possible to compare the on time performances of various carriers throughou
 Not really, The visualisation is quite self-explaining but I would recommend a second chart which illustrates some key characteristics for a specific carrier
 
 
+User 2: Filip Biedziak
 
 ## Resources: 
 
