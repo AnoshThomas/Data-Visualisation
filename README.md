@@ -42,6 +42,25 @@ Not really, The visualisation is quite self-explaining but I would recommend a s
 
 
 User 2: Filip Biedziak
+•	What do you notice in the visualization?
+
+I’m not 100% sure what you exactly mean by that. Do you mean what information I see? Well, that would be the performance of different American carriers measured by some number (above the bars) and categorizing deliveries by “on time”, “delayed” and “cancelled” over time.
+
+•	What questions do you have about the data?
+
+What do the numbers above the bars say? Has the amount of carriers decreased or increased? What about the amount of deliveries? How big is the market share of each carrier? This information would be helpful to interpret the data.
+
+•	What relationships do you notice?
+
+The number above the bars seems to correlate with the percentage of on-time deliveries. So I guess it is a measure for the performance (maybe customer satisfaction).
+
+•	What do you think is the main takeaway from this visualization?
+
+I would say that the overall performance is on time for all carriers. Looking at the development over time I would say that it was a booming market from 2003 to ~2009 with an increasing variety of American carriers. After that it seems that that a few carriers established themselves and the rest got outperformed. The overall performance does not change much, at least at first glance. Maybe a little increase over time, but usually around ~0.8.
+
+•	Is there something you don’t understand in the graphic?
+
+Not really. It is pretty straightforward. 
 
 ## Resources: 
 
