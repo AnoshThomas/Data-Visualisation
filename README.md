@@ -15,3 +15,14 @@ enabling the user to select the desired year.
 
 My initial design (index_v1.html)  contained only the bar chart graph and after obtaining feedback I chose to incldue a second chart 
 (pie-chart) which illustrated the statistics for a specific carrier in a given year. While hovering with the mouse on a bar woudl reflect the changes in the pie-chart.  Also I changed the color code to google style whcih was a bit more pleasing. 
+
+## Feedback 
+
+user 1:
+
+
+## Resources: 
+
+discussion on the udacity forum - support from Myles 
+
+google on usage of javascript and d3.js libraries 
