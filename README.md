@@ -18,7 +18,28 @@ My initial design (index_1.html)  contained only the bar chart graph and after o
 
 ## Feedback 
 
-user 1:
+user 1:Alvi Vincent (index_1.html)
+  
+•	  What do you notice in the visualization?
+
+I can see the on time performance of various American carriers and their values for various years 
+
+•	What questions do you have about the data?
+
+How is the on time performance defined?  How was the data collection process performed? Did all Airlines report the statistics in a similar way?
+
+•	What relationships do you notice?
+
+I have the impression that the performance of the airlines has improved over the years but some airlines also have disappeared from the market 
+
+•	What do you think is the main takeaway from this visualization?
+
+It is possible to compare the on time performances of various carriers throughout the span of 15 years 
+
+•	Is there something you don’t understand in the graphic?
+
+Not really, The visualisation is quite self-explaining but I would recommend a second chart which illustrates some key characteristics for a specific carrier
+
 
 
 ## Resources: 
