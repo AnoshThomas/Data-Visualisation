@@ -9,6 +9,16 @@ This visualisation aims to explore the on time performances of various american 
 In addition on selecting a specific year and carrier a second chart illustrates the distribution for that specific carrier (delayed, on time, cancelled) , the individual csv files were generated in a preprocessing step using a python script (preProcessAirlinePerfo.py)
 to separate the data for each year. The ontime performance was calculated using teh formula onTimePerfo=1-delayed/arrivals. 
 
+### Main Findings
+On an average the on time performance of all aircraft lie within 80% with delays just over 15%.  The percentage of cancelled flights is less than 5%.
+From the years 2003 to 2006 Skywest Airlines (OO) reported the best performances with the highest value of 89% in the year 2003.
+Since 2008 Alaska Airlines (AS) consistently reported best performance figures in a consistent manner.
+A strange pattern could be observed for Pinnacle Airlines (9E) which reported performance figures only for select years (2007 to 2010 and 2013). 
+Furthermore it is interesting to note that in the initial years more airlines reported performance figures than the in most recent years (2016 and 2017). 
+Looking at the development over time it seems there was a booming market from 2003 to ~2009 with an increasing variety of American carriers. After that it seems that that a few carriers established themselves and the rest got outperformed.
+
+
+
 ## Design
 
 The main aim was to create an illustration showing the comparison of on time performances of various american carriers for the years 2003-2007. For this I chose to use bar charts with the values displayed on top of the bar chart. In addition i used a drop down widget for enabling the user to select the desired year.  
