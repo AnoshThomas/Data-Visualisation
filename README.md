@@ -15,6 +15,7 @@ From the years 2003 to 2006 Skywest Airlines (OO) reported the best performances
 Since 2008 Alaska Airlines (AS) consistently reported best performance figures in a consistent manner.
 A strange pattern could be observed for Pinnacle Airlines (9E) which reported performance figures only for select years (2007 to 2010 and 2013). 
 Furthermore it is interesting to note that in the initial years more airlines reported performance figures than the in most recent years (2016 and 2017). 
+
 Looking at the development over time it seems there was a booming market from 2003 to ~2009 with an increasing variety of American carriers. After that it seems that that a few carriers established themselves and the rest got outperformed.
 
 
