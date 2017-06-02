@@ -11,6 +11,7 @@ to separate the data for each year. The ontime performance was calculated using 
 
 ### Main Findings
 On an average the on time performance of all aircraft lie within 80% with delays just over 15%.  The percentage of cancelled flights is less than 5%.
+
 From the years 2003 to 2006 Skywest Airlines (OO) reported the best performances with the highest value of 89% in the year 2003.
 Since 2008 Alaska Airlines (AS) consistently reported best performance figures in a consistent manner.
 A strange pattern could be observed for Pinnacle Airlines (9E) which reported performance figures only for select years (2007 to 2010 and 2013). 
