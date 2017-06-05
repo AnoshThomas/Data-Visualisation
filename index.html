@@ -56,8 +56,6 @@
 		carriers. After that it seems that that a few carriers established 
 		themselves and the rest got outperformed. </p>
 		
-	</div>
-
 	Select year 
 	<select onchange="loadData()" id="year">
 			<option >2003</option>
@@ -75,7 +73,11 @@
 			<option >2015</option>
 			<option >2016</option>
 			<option >2017</option>
-	</select>	
+	</select>
+		
+	</div>
+
+		
     <script type="text/javascript">  
      	
 	
@@ -100,13 +102,9 @@
 		var selectedYear = document.getElementById('year')
 								  .selectedOptions[0].text;
 								  
-		header = "Proportion of punctual flights (excluding cancellations) in year : "
-						+ selectedYear;			
-		d3.select("h2").remove()
-		d3.select("body")
-			.append("h2")
-			.text(header)	
-		
+		barheader = "Percentage of on-Time flights (excluding cancellations) in year : "
+							+ selectedYear;			
+				
 		// function to handle histogram.		
 		function handleHistogram(hGData)	{
 			
@@ -115,11 +113,10 @@
 			d3.select("svg.legend").remove();
 			d3.selectAll("h4").remove()
 			d3.selectAll("h5").remove()
-			d3.selectAll("mydiv").remove()
-				
+							
 			
 			var hG={}, hGDim = {t: 60, r: 0, b: 30, l: 10}; 
-			hGDim.w = 800 - hGDim.l - hGDim.r, 
+			hGDim.w = 900 - hGDim.l - hGDim.r, 
 			hGDim.h = 300 - hGDim.t - hGDim.b;				
 			
 			var hGsvg = d3.select("body")				
@@ -127,6 +124,16 @@
 				.attr("width", hGDim.w + hGDim.l + hGDim.r)
 				.attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
 				.attr("transform", "translate(" + hGDim.l + "," +hGDim.t+ ")");
+			
+			// title for histogram
+			hGsvg.append("text")
+				.attr("x", (hGDim.w / 2))             
+				.attr("y", 0 - (hGDim.t / 1.5))
+				.attr("text-anchor", "middle")  
+				.style("font-size", "21px")
+				.style('fill', colors_google(5))				
+				.text(barheader);
+
 				
 			// create x axis labels (names of carriers)			
 			var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
@@ -162,7 +169,8 @@
 				.attr('fill',barColor)
 								
 			//Create the  labels above the bars.		
-			bars.append("text").text(function(d){return d3.format(".2f")(d[1])})
+			bars.append("text").text(function(d){
+				return d3.format(".1f")(100*d[1])})
 				.attr("x", function(d) { return x(d[0])+(x.rangeBand())/2; })
 				.attr("y", function(d) { return y(d[1]) -5; })
 				.attr("text-anchor", "middle");		
@@ -183,7 +191,7 @@
 
 				// for the pie chart, you want the data to be a list of objects
 				var pieData = [];
-
+				var selectedAC=d[0];
 				d.slice(2, 5).forEach(function(d, i) {
 					var temp = {};
 					temp['value'] = d;
@@ -192,24 +200,24 @@
 				})
 
 				// call the pieChart() function with the new data
-				pieChart(pieData);
+				pieChart(pieData,selectedAC);
 				}			
 		
 			return hG;
 		}
 		
 		// function to handle pieChart.
-		function pieChart(pD) {
+		function pieChart(pD, AcName) {
 			d3.select("svg#pieChart").remove();			
 
 			var pC = {},
 			pieDim = {
-					w: 250,
-					h: 250
+					w: 600,
+					h: 400
 					};
-			pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
+			pieDim.r = Math.min(pieDim.w, 0.75*pieDim.h) / 2;
           
-			var rw = pieDim.w / 2;
+			var rw = pieDim.w / 1.5;
 			var rh = pieDim.h / 2;
 
 			// create svg for pie chart.
@@ -219,6 +227,17 @@
 				.attr("width", pieDim.w).attr("height", pieDim.h)
 				.append("svg:g")
 				.attr("transform", "translate(" + rw + "," + rh + ")");
+			
+			// add title to the pie chart 
+			var pieTitle="Flights distribution for Airline: " + AcName;
+			piesvg.append("text")
+				.attr("dx", 0)             
+				.attr("dy", -160)
+				.attr("text-anchor", "middle")  
+				.style("font-size", "21px")
+				.style('fill', colors_google(5))				
+				.text(pieTitle);
+				
 			//move the center of the pie chart from 0, 0 to radius, radius
 
 			// create function to draw the arcs of the pie slices.
@@ -263,11 +282,12 @@
 				//Get the percentages for each segment in the pie chart	
 				
 				.text(function(d, i) {						
-					var formatDecimal = d3.format(".1f")
+					var formatDecimal = d3.format(".0f")
 					var sum = d3.sum(pD, function(d) { return d.value; })									
-					var percent =  100*(pD[i].value)/sum;
+					var percent =  (pD[i].value);
+					var percentDecimal = 100*percent/sum;
 					// return values only if values greater than 5%
-					if (percent >= 5) {return formatDecimal(percent) + "%"}
+					if (percentDecimal >= 5) {return formatDecimal(percent)}
 				
 				
 									
