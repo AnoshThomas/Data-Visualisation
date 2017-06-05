@@ -113,8 +113,24 @@
 			d3.select("svg.legend").remove();
 			d3.selectAll("h4").remove()
 			d3.selectAll("h5").remove()
-							
 			
+			// Aircraft codes 			
+			myAircaftDict={"TZ": "ATA Airlines","FL": "AirTran Airways",
+						"AS": "Alaska Airlines","AA": "American Airlines",
+						"AQ": "Aloha Airlines", "HP": "America West Airlines",
+						"VX": "Virgin America","MQ": "American Eagle Airlines", 
+						"DH": "Atlantic Coast Airlines", 
+						"EV": "Atlantic Southeast Airlines","OH": "Comair Inc.", 
+						"CO": "Continental Airlines", "DL": "Delta Airlines", 
+						"9E": "Pinnacle Airlines","MQ":"Envoy Air", 
+						"EV": "ExpressJet Airlines", "F9": "Frontier Airlines",
+						"HA": "Hawaiian Airlines ","XE": "ExpressJet Airlines",
+						"DH": "Independence Air", "B6": "JetBlue Airways", 
+						"YV": "Mesa Airlines", "NW": "Northwest Airlines",
+						"OO": "SkyWest Airlines", "WN": "Southwest Airlines", 
+						"NK": "Spirit Airlines", "US":  "US Airways", 
+						"UA": "United Airlines"};	
+						
 			var hG={}, hGDim = {t: 60, r: 0, b: 30, l: 10}; 
 			hGDim.w = 900 - hGDim.l - hGDim.r, 
 			hGDim.h = 300 - hGDim.t - hGDim.b;				
@@ -137,7 +153,10 @@
 				
 			// create x axis labels (names of carriers)			
 			var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
-					.domain(hGData.map(function(d) { return d[0]; }));		
+					.domain(hGData.map(function(d) { 
+						console.log(d[0])
+						//return myAircaftDict[d[0]]; }));	
+						return d[0]; }));	
 			
 			// Add x-axis to the histogram svg	
 			hGsvg.append("g").attr("class", "x axis")
