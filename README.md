@@ -105,8 +105,15 @@ Would you mind answering these questions?
 During the previous review I receievd the feedback to include the summary on top of the project page which was realised here.
 To avoid overlapping  of the pie chart labels I decided to place labels on the slices only if the values were greater than a certain 
 threshold value as sugegsted in the review. Also for the airline codes I placed now each carrier in a separate line. 
+
+### Review 3 Feedback
+The main feedback was to include a separate title for the pie chart and also include the airline names in the x-axis of the 
+bar charts. Initially the pei chart was also showing somewaht the information as the barchart but not making them comparable. 
+Therefore I chose to show the actua flight distributions in the pie chart (with actual numbers) to give additional quantitative 
+information about an airline (how many flights arrived on time that year, how many delayed). There was also a problem of overlapping
+pie chart labels and now I placed them outside the pie chart. 
 ## Resources: 
 
-discussion on the udacity forum - support from Myles 
+discussion on the udacity forum - Huge support from Myles !
 
 google on usage of javascript and d3.js libraries 
