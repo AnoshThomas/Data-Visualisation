@@ -101,7 +101,10 @@ Would you mind answering these questions?
 
 [BLANC, Florian] In don’t clearly understand the link between the figures on top of the bar graph and the figures on the pie graph.
 
-
+### Review 2 Feedback
+During the previous review I receievd the feedback to include the summary on top of the project page which was realised here.
+To avoid overlapping  of the pie chart labels I decided to place labels on the slices only if the values were greater than a certain 
+threshold value as sugegsted in the review. Also for the airline codes I placed now each carrier in a separate line. 
 ## Resources: 
 
 discussion on the udacity forum - support from Myles 
