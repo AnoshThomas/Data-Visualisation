@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
+
+
 <head>
   <meta charset="utf-8">
   <script src="http://d3js.org/d3.v3.min.js"></script>
     <style>
+
 	 h2 {
         color: black;
         text-align: center;
       }
 
-     body{ width:1060px; margin:200px auto; }
+     body{ width:1060px; margin:20px auto; }
 	 path { stroke: #fff; }
 	 path:hover { opacity:0.9; }
 	 rect:hover { fill:blue; }
@@ -21,16 +24,40 @@
 	.x.axis path { display: none; }
 	
 	.legend{
-			margin-bottom:76px;
+			margin-bottom:5px;
 			display:inline-block;
 			border-collapse: collapse;
 			border-spacing: 0px;
 			}
 	.legend td{padding:4px 5px; vertical-align:bottom;}
 	.legendFreq, .legendPerc{ align:right; width:50px; }
-    </style>
 	
+    </style> 
 	
+	<! Main Summary>
+	<div class="box">
+		<h1>Performance Analysis of American carriers for the 
+			years 2003 -2017 </h1>
+		<p>On an average the on time performance of all aircraft lie within 80%
+		with delays just over 15%. The percentage of cancelled flights is 
+		less than 5%.</p>
+		
+		<p>From the years 2003 to 2006 Skywest Airlines (OO) reported the best
+		performances with the highest value of 89% in the year 2003. 
+		Since 2008 Alaska Airlines (AS) consistently reported best performance
+		figures in a consistent manner. A strange pattern could be observed for 
+		Pinnacle Airlines (9E) which reported performance figures only for 
+		select years (2007 to 2010 and 2013). Furthermore it is interesting to 
+		note that in the initial years more airlines reported performance 
+		figures than the in most recent years (2016 and 2017). </p>
+		
+		<p>Looking at the development over time it seems there was a booming 
+		market from 2003 to ~2009 with an increasing variety of American 
+		carriers. After that it seems that that a few carriers established 
+		themselves and the rest got outperformed. </p>
+		
+	</div>
+
 	Select year 
 	<select onchange="loadData()" id="year">
 			<option >2003</option>
@@ -73,56 +100,23 @@
 		var selectedYear = document.getElementById('year')
 								  .selectedOptions[0].text;
 								  
-		header = "On-Time performance of  American carriers for the year " 
-														+ selectedYear;		 
-		
+		header = "Proportion of punctual flights (excluding cancellations) in year : "
+						+ selectedYear;			
 		d3.select("h2").remove()
 		d3.select("body")
 			.append("h2")
-			.text(header)
+			.text(header)	
 		
-		// Display Airline codes and their fullnames		
-		d3.selectAll("h4").remove()
-		d3.select("body").append("h4")	
-			.text("Airline codes")
-			.style('color', colors_google(5))	 
-		
-		var AirlineCodeColorIndex=16			
-		d3.selectAll("h5").remove()
-		d3.select("body").append("h5")	
-			.text("TZ: ATA Airlines, FL: AirTran Airways, AS: Alaska Airlines")
-			.style('color', colors_google(AirlineCodeColorIndex)) 
-			   
-		d3.select("body").append("h5")	
-			.text("AA: American Airlines, AQ: Aloha Airlines, HP: America West Airlines, VX: Virgin America")
-			.style('color', colors_google(AirlineCodeColorIndex)) 
-		  
-		d3.select("body").append("h5")	
-			.text("MQ: American Eagle Airlines, DH: Atlantic Coast Airlines, EV: Atlantic Southeast Airlines ")
-			.style('color', colors_google(AirlineCodeColorIndex)) 
-		
-		d3.select("body").append("h5")	
-			.text("OH: Comair Inc., CO: Continental Airlines, DL: Delta Airlines, 9E: Pinnacle Airlines")
-			.style('color', colors_google(AirlineCodeColorIndex)) 		
-		
-		d3.select("body").append("h5")	
-			.text("MQ:Envoy Air, EV/XE: ExpressJet Airlines, F9: Frontier Airlines, HA: Hawaiian Airlines  ")
-			.style('color', colors_google(AirlineCodeColorIndex)) 	
-		
-		d3.select("body").append("h5")	
-			.text("DH: Independence Air, B6: JetBlue Airways, YV: Mesa Airlines, NW: Northwest Airlines   ")
-			.style('color', colors_google(AirlineCodeColorIndex)) 	
-
-		d3.select("body").append("h5")	
-			.text("OO: SkyWest Airlines, WN: Southwest Airlines, NK: Spirit Airlines, US:  US Airways, UA: United Airlines")
-			.style('color', colors_google(AirlineCodeColorIndex)) 	
-		  
 		// function to handle histogram.		
 		function handleHistogram(hGData)	{
 			
 			d3.select("svg#barChart").remove();
 			d3.select("svg#pieChart").remove();
-			d3.select("svg.legend").remove();			
+			d3.select("svg.legend").remove();
+			d3.selectAll("h4").remove()
+			d3.selectAll("h5").remove()
+			d3.selectAll("mydiv").remove()
+				
 			
 			var hG={}, hGDim = {t: 60, r: 0, b: 30, l: 10}; 
 			hGDim.w = 800 - hGDim.l - hGDim.r, 
@@ -136,12 +130,18 @@
 				
 			// create x axis labels (names of carriers)			
 			var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
-					.domain(hGData.map(function(d) { return d[0]; }));
+					.domain(hGData.map(function(d) { return d[0]; }));		
 			
-			// Add x-axis to the histogram svg			
+			// Add x-axis to the histogram svg	
 			hGsvg.append("g").attr("class", "x axis")
 				.attr("transform", "translate(0," + hGDim.h + ")")
-				.call(d3.svg.axis().scale(x).orient("bottom"));
+				.call(d3.svg.axis().scale(x))
+				.selectAll("text")
+				.attr("y", 0)
+				.attr("x", 9)
+				.attr("dy", ".35em")
+				.attr("transform", "rotate(45)")
+				.style("text-anchor", "start");
 		    
 			// Create function for y-axis to the svg
 			var y = d3.scale.linear().range([hGDim.h, 0])
@@ -250,6 +250,7 @@
 				.attr("d", arc); //this creates the actual SVG path 
 				
 				arcs.append("svg:text") //add a label to each slice
+					.style("text-anchor","center")
 					.attr("transform", function(d) { //set the label's
 									 //origin to the center of the arc
 					//we have to make sure to set these before 
@@ -260,11 +261,16 @@
 					return "translate(" + arc.centroid(d) + ")"; 
 						})                
 				//Get the percentages for each segment in the pie chart	
-				.text(function(d, i) {					
+				
+				.text(function(d, i) {						
 					var formatDecimal = d3.format(".1f")
-					var sum = d3.sum(pD, function(d) { return d.value; })					
+					var sum = d3.sum(pD, function(d) { return d.value; })									
 					var percent =  100*(pD[i].value)/sum;
-					return formatDecimal(percent) + "%"					
+					// return values only if values greater than 5%
+					if (percent >= 5) {return formatDecimal(percent) + "%"}
+				
+				
+									
 				});		
 				
 				// Add legend 
@@ -290,7 +296,99 @@
 					.attr("y", 9)
 					.attr("dy", ".35em")
 					.text(function(d,i) { return pD[i].labels; });		
-			 
+		
+		
+		// Display Airline codes and their fullnames		
+		d3.selectAll("h4").remove()
+		d3.select("body").append("h4")	
+			.text("Airline codes")
+			.style('color', colors_google(5))	 
+		
+		var AirlineCodeColorIndex=16			
+		d3.selectAll("h5").remove()
+		d3.select("body").append("h5")	
+			.text("AA: American Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("AS: Alaska Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("AQ: Aloha Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex)) 
+		d3.select("body").append("h5")	
+			.text("B6: JetBlue Airways")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("CO: Continental Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("DH: Independence Air")
+			.style('color', colors_google(AirlineCodeColorIndex))	   
+		d3.select("body").append("h5")	
+			.text("DH: Atlantic Coast Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))	
+		d3.select("body").append("h5")	
+			.text("DL: Delta Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("EV: Atlantic Southeast Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex)) 
+		d3.select("body").append("h5")	
+			.text("EV/XE: ExpressJet Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))	
+		d3.select("body").append("h5")	
+			.text("F9: Frontier Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))	
+		d3.select("body").append("h5")	
+			.text("FL: AirTran Airways")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("HP: America West Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex)) 
+		d3.select("body").append("h5")	
+			.text("HA: Hawaiian Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex)) 	
+		d3.select("body").append("h5")	
+			.text("MQ: American Eagle Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex)) 
+		d3.select("body").append("h5")	
+			.text("MQ:Envoy Air")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("NK: Spirit Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("NW: Northwest Airlines ")
+			.style('color', colors_google(AirlineCodeColorIndex)) 
+		d3.select("body").append("h5")	
+			.text("OH: Comair Inc.")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("OO: SkyWest Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))			
+		d3.select("body").append("h5")	
+			.text("TZ: ATA Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("US:  US Airways")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("UA: United Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))	
+		d3.select("body").append("h5")	
+			.text("VX: Virgin America")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("WN: Southwest Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("YV: Mesa Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))
+		d3.select("body").append("h5")	
+			.text("9E: Pinnacle Airlines")
+			.style('color', colors_google(AirlineCodeColorIndex))	
+		
+			
 				return pC;
 		}		
 		// Extract histogram data 
@@ -311,12 +409,12 @@
 		
      
     };
-		
+	 
     </script>
+	
   </head>
 <body>
-  <script type="text/javascript">
-		
+  <script type="text/javascript">	
 		
 		// Load the page initially with 2003 year data as default	
 		var defaultdata = 'airlinePerfoPreprocessed_2003.csv'	
