@@ -8,7 +8,7 @@ Created on Sun May 21 17:22:43 2017
 import seaborn as sns
 import pandas as pd
 
-inputfile="129994168_32017_1830_airline_delay_causes.csv"
+inputfile="129994168_32017_1830_airline_delay_causes_v2.csv"
 
 df=pd.read_csv(inputfile,delimiter=';')
 
