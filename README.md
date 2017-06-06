@@ -101,17 +101,28 @@ Would you mind answering these questions?
 
 [BLANC, Florian] In don’t clearly understand the link between the figures on top of the bar graph and the figures on the pie graph.
 
-### Review 2 Feedback
+### Review 1 Feedback
 During the previous review I receievd the feedback to include the summary on top of the project page which was realised here.
 To avoid overlapping  of the pie chart labels I decided to place labels on the slices only if the values were greater than a certain 
 threshold value as sugegsted in the review. Also for the airline codes I placed now each carrier in a separate line. 
 
-### Review 3 Feedback
+### Review 2 Feedback
 The main feedback was to include a separate title for the pie chart and also include the airline names in the x-axis of the 
 bar charts. Initially the pei chart was also showing somewaht the information as the barchart but not making them comparable. 
 Therefore I chose to show the actua flight distributions in the pie chart (with actual numbers) to give additional quantitative 
 information about an airline (how many flights arrived on time that year, how many delayed). There was also a problem of overlapping
 pie chart labels and now I placed them outside the pie chart. 
+
+### Review 3 Feedback:
+ Some labels were overlapping in the bar charts for Express Jet Airlines. The root cause was that there were multiple airline codes (XE/EV/RU) assigned to the same airline which was already in the RITA data set. I fixed this by updating the CSV's with one identifier
+which I thought to be legitimate since we are dealing with the same airline. So now 15 new CSV's are provided and the pythons script to generate it. This should be solved by now. 
+
+I rounded the bar chart labels and included a % sign as recommended. In addition I updated the pie chart title and the formatting of the numbers on the pie chart legend. 
+
+Regarding bar order and consistency I chose to leave this as it is. The reason was that in my pre-processing step I generate specific files for each year and some airlines do not appear in all the years so I need 
+to account this already in my pre-processing step and generate the data differently. 
+Also the total number of unique airlines over the years is 28 and fitting them all in the bar chart would in my opinion make the chart more congested. 
+
 ## Resources: 
 
 discussion on the udacity forum - Huge support from Myles !
